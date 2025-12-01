@@ -1,0 +1,18 @@
+---
+title: "Homework 5"
+author: "Madison Johnson"
+date: "2025-12-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggthemes)
+```
+
+```{r test}
+file_path <- "data/homicide-data.csv"
+homicide_data <- read_csv(file_path)
+```
+
+#this is a test!
