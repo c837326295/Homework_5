@@ -10,9 +10,16 @@ library(tidyverse)
 library(ggthemes)
 ```
 
-```{r test}
+```{r loading}
 file_path <- "data/homicide-data.csv"
 homicide_data <- read_csv(file_path)
 ```
 
-#this is a test!
+```{r clean_up}
+homicides <- homicide_data %>% 
+  unite(col = "city_name", c("city", "state"), sep = ", ")
+
+baltimore <- homicides %>% 
+   filter(city_name == "Baltimore, MD")
+```
+
