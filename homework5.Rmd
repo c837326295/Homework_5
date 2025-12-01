@@ -29,5 +29,12 @@ head(baltimore)
 baltimore <- baltimore %>% 
   mutate("reported_date" = ymd(reported_date)) %>% 
   rename("date" = reported_date)
+
+balt_month <- baltimore %>% 
+  mutate(year = year(date),
+         month = month(date)) %>% 
+  group_by(year, month) %>% 
+  summarise(n = n()) %>% 
+  ungroup
 ```
 
