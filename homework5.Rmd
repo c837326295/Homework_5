@@ -15,11 +15,19 @@ file_path <- "data/homicide-data.csv"
 homicide_data <- read_csv(file_path)
 ```
 
-```{r clean_up}
+```{r baltimore}
 homicides <- homicide_data %>% 
   unite(col = "city_name", c("city", "state"), sep = ", ")
 
 baltimore <- homicides %>% 
    filter(city_name == "Baltimore, MD")
+
+head(baltimore)
+```
+
+```{r date}
+baltimore <- baltimore %>% 
+  mutate("reported_date" = ymd(reported_date)) %>% 
+  rename("date" = reported_date)
 ```
 
