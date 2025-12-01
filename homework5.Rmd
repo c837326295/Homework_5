@@ -8,6 +8,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(ggthemes)
+library(scales)
 ```
 
 ```{r loading}
@@ -25,7 +26,7 @@ baltimore <- homicides %>%
 head(baltimore)
 ```
 
-```{r date}
+```{r cleanup}
 baltimore <- baltimore %>% 
   mutate("reported_date" = ymd(reported_date)) %>% 
   rename("date" = reported_date)
@@ -36,5 +37,14 @@ balt_month <- baltimore %>%
   group_by(year, month) %>% 
   summarise(n = n()) %>% 
   ungroup
+
+balt_month2 <- balt_month %>% 
+  unite("yr_month", year, month, sep = "-") %>% 
+  mutate("yr_month" = ymd(paste0(yr_month, "-01")))
+```
+
+```{r plotting}
+balt_month2 %>% 
+  ggplot(aes(x = yr_month, y = n))
 ```
 
