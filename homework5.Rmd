@@ -47,12 +47,13 @@ balt_month2 <- balt_month %>%
 
 ```{r plotting}
 balt_month2 %>% 
-  ggplot(aes(x = yr_month, y = n)) +
+  ggplot(aes(x = yr_month, y = n, fill = season)) +
   geom_col() +
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
-  scale_fill_manual(values = month
+  scale_fill_manual(values = c("Winter" = "lightblue",
+                               "Summer" = "lightgray")) +
   geom_vline(xintercept = as.Date("2015-04-01"),
              color = "red",
              linetype = "dashed") +
