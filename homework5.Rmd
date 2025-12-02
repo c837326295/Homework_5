@@ -45,6 +45,7 @@ balt_month2 <- balt_month %>%
 
 ```{r plotting}
 balt_month2 %>% 
-  ggplot(aes(x = yr_month, y = n))
+  ggplot(aes(x = yr_month, y = n)) +
+  geom_col()
 ```
 
