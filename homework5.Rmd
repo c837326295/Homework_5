@@ -45,7 +45,7 @@ balt_month2 <- balt_month %>%
  mutate(season = ifelse(as.numeric(month) %in% c(11, 12, 1, 2, 3, 4), "Winter", "Summer"))
 ```
 
-```{r plotting, fig.width= 7}
+```{r plotting, warning = FALSE, message = FALSE, fig.width= 7}
 balt_month2 %>% 
   ggplot(aes(x = yr_month, y = n, fill = season)) +
   geom_col() +
@@ -69,6 +69,7 @@ balt_month2 %>%
            y = 40,
            label = "Freddie Gray",
            color = "lightgray") +
+  theme(legend.position = "bottom") +
   theme_dark()
 ```
 
