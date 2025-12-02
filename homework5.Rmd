@@ -49,6 +49,10 @@ balt_month2 <- balt_month %>%
 balt_month2 %>% 
   ggplot(aes(x = yr_month, y = n, fill = season)) +
   geom_col() +
+  geom_smooth(aes(x = yr_month, y = n, group = 1),
+    inherit.aes = FALSE,
+    color = "blue",
+    se = FALSE) +
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
