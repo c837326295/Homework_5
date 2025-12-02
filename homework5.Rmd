@@ -26,7 +26,7 @@ baltimore <- homicides %>%
 head(baltimore)
 ```
 
-```{r cleanup}
+```{r cleanup, message=FALSE}
 baltimore <- baltimore %>% 
   mutate("reported_date" = ymd(reported_date)) %>% 
   rename("date" = reported_date)
@@ -45,14 +45,13 @@ balt_month2 <- balt_month %>%
  mutate(season = ifelse(as.numeric(month) %in% c(11, 12, 1, 2, 3, 4), "Winter", "Summer"))
 ```
 
-```{r plotting}
+```{r plotting, fig.width= 7}
 balt_month2 %>% 
   ggplot(aes(x = yr_month, y = n, fill = season)) +
   geom_col() +
   geom_smooth(aes(x = yr_month, y = n, group = 1),
     inherit.aes = FALSE,
-    color = "blue",
-    se = FALSE) +
+    color = "blue", se = FALSE, span = 0.2) +
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
@@ -60,13 +59,14 @@ balt_month2 %>%
                                "Summer" = "lightgray")) +
   geom_vline(xintercept = as.Date("2015-04-01"),
              color = "red",
-             linetype = "dashed") +
-  annotate("text", x = as.Date("2013-04-01"),
+             linetype = "dashed",
+             size = 1) +
+  annotate("text", x = as.Date("2014-04-01"),
            y = 43,
            label = "Arrest of",
            color = "lightgray") +
-  annotate("text", x = as.Date("2013-04-01"),
-           y = 37,
+  annotate("text", x = as.Date("2014-04-01"),
+           y = 40,
            label = "Freddie Gray",
            color = "lightgray") +
   theme_dark()
