@@ -11,7 +11,7 @@ library(ggthemes)
 library(scales)
 ```
 
-```{r loading}
+```{r loading, message=FALSE}
 file_path <- "data/homicide-data.csv"
 homicide_data <- read_csv(file_path)
 ```
@@ -40,7 +40,8 @@ balt_month <- baltimore %>%
 
 balt_month2 <- balt_month %>% 
   unite("yr_month", year, month, sep = "-") %>% 
-  mutate("yr_month" = ymd(paste0(yr_month, "-01")))
+  mutate("yr_month" = ymd(paste0(yr_month, "-01"))) %>% 
+  mutate("month" = factor(format(yr_month, "%m")))
 ```
 
 ```{r plotting}
@@ -50,6 +51,7 @@ balt_month2 %>%
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
+  scale_color_manual(values = c())
   geom_vline(xintercept = as.Date("2015-04-01"),
              color = "red",
              linetype = "dashed") +
