@@ -41,7 +41,8 @@ balt_month <- baltimore %>%
 balt_month2 <- balt_month %>% 
   unite("yr_month", year, month, sep = "-") %>% 
   mutate("yr_month" = ymd(paste0(yr_month, "-01"))) %>% 
-  mutate("month" = factor(format(yr_month, "%m")))
+  mutate("month" = factor(format(yr_month, "%m"))) %>% 
+ mutate(season = ifelse(as.numeric(month) %in% c(11, 12, 1, 2, 3, 4), "Winter", "Summer"))
 ```
 
 ```{r plotting}
@@ -51,7 +52,7 @@ balt_month2 %>%
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
-  scale_color_manual(values = c())
+  scale_fill_manual(values = month
   geom_vline(xintercept = as.Date("2015-04-01"),
              color = "red",
              linetype = "dashed") +
