@@ -46,6 +46,21 @@ balt_month2 <- balt_month %>%
 ```{r plotting}
 balt_month2 %>% 
   ggplot(aes(x = yr_month, y = n)) +
-  geom_col()
+  geom_col() +
+  labs(title = "Homicides in Baltimore, MD",
+       x = "Date",
+       y = "Monthly Homicides") +
+  geom_vline(xintercept = as.Date("2015-04-01"),
+             color = "red",
+             linetype = "dashed") +
+  annotate("text", x = as.Date("2013-04-01"),
+           y = 43,
+           label = "Arrest of",
+           color = "lightgray") +
+  annotate("text", x = as.Date("2013-04-01"),
+           y = 37,
+           label = "Freddie Gray",
+           color = "lightgray") +
+  theme_dark()
 ```
 
